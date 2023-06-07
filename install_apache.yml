@@ -1,0 +1,28 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Update Cache
+    yum:
+      update_cache: yes
+  - name: Apache latest version installation
+    yum:
+      name: httpd
+      state: latest
+  - name: Enable service to start on boot up
+    service:
+      name: httpd
+      state: started
+  - name: Create firewall rule for apache service
+    firewalld:
+      service: http
+      zone: public
+      permanent: yes
+      immediate: yes
+      state: enabled
+  handlers:
+  - name: Restart apache service
+    service:
+      name: httpd
+      state: restarted
