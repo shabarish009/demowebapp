@@ -6,6 +6,7 @@
   - name: Update Cache
     yum:
       update_cache: yes
+    when: ansible_virtualization_type == "virtualbox" or ansible_distribution in [ "Ubuntu" ]
   - name: Apache latest version installation
     yum:
       name: httpd
