@@ -1,2 +1,5 @@
-target1 ansible_host=192.168.0.111 ansible_ssh_pass=osboxes.org
-target2 ansible_host=192.168.0.112 ansible_ssh_pass=osboxes.org
+[type1]
+target1 ansible_host=192.168.0.110 ansible_ssh_pass=osboxes.org apache_package=httpd php_package=php
+
+[type2]
+target2 ansible_host=192.168.0.109 ansible_ssh_pass=osboxes.org apache_package=httpd php_package=php

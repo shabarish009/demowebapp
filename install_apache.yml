@@ -3,14 +3,16 @@
 - hosts: all
   become: yes
   tasks:
-  - name: Update Cache
+  - name: Apache and php latest version installation
+    when: ansible_distribution == "CentOS"    
     yum:
-      update_cache: yes
-    when: ansible_virtualization_type == "virtualbox" or ansible_distribution in [ "Ubuntu" ]
-  - name: Apache latest version installation
-    yum:
-      name: httpd
+      name:
+        - httpd
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
       state: latest
+      update_cache: true
+     
   - name: Enable service to start on boot up
     service:
       name: httpd
