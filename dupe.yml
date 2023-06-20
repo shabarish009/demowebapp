@@ -1,0 +1,54 @@
+---
+
+- hosts: type1
+  become: yes
+  tasks:
+  - name: Apache and php latest version installation
+    tags: tag0    
+    when: ansible_distribution == "CentOS"    
+    yum:
+      name:
+        - httpd
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+      update_cache: true
+  - name: Copy file
+    tags: copy
+    copy:
+      src: neofetch
+      dest: /home/osboxes/newtest
+      owner: root
+      group: root
+      mode: 0644      
+  - name: Enable service to start on boot up
+    tags: tag1
+    service:
+      name: httpd
+      state: started
+  - name: Create firewall rule for apache service
+    firewalld:
+      service: http
+      zone: public
+      permanent: yes
+      immediate: yes
+      state: enabled
+  handlers:
+  - name: Restart apache service
+    service:
+      name: httpd
+      state: restarted
+
+- hosts: type2
+  become: yes
+  tasks:
+  - name: Update to latest
+    tags: tag2
+    yum:
+      name: "*"
+      state: latest
+     
+  - name: Information on package
+    tags: tag3
+    yum:
+      list: php

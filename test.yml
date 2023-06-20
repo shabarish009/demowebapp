@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: add user
+    user:
+       name: Ram
+       groups: root
+  - name: passwd for Ram
+    authorized_keys:
+       user: Ram
+       key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsJN7qfcjPMZT36PjMpcgdklezML8R2rqflpYoaG2kX/ijWQ6aMl+0g9xEj+WNB3KU3FGMm3AzLojwCaV6sYjmbniSUvKBzvdlnoeVG7hcc3SD29yyaNoAYXQ09tIIV44jb6/68zhoJDedxHng/FMyWBjRUgoDJf99Vrn3cHvFgxEq1fegVPqhxvImJzkFCR2xG7e4BQdrNHn3JWj9JGpHOIs3sujfwQ+wXcdfR/1EqpNXqu9FnG998KfxSg1EfcRI3NnnhpZ8ElvB7bG3YI5p9pUl8fSoNuQg++CMztTCNvRtPf7nJR2YZz05TWYvn6P3Khc7JKThtN+70Tn+rfzYbvZQQngrCMMoYM4Wp3e2ADjTw6DNrvZ7CM3l2JLGGIPDPJRAlsqCbLGbFEXHdh9ZUh4KrAGAgeYzzDJyvAFf4aSCqw095VEJj6QomXEOPOC5p/w01d2I1juYxYO51eMsIaweKOFANbsYCAXhcLg9zZ+1Qr08P+ztodhq9SM5yN7auBc0fwoftwvol0gCRbZ/Xz9Qnnl9rh7x6pB8F494NVpjH9UdgcxoVftPPEXOlyfFrl1IwtQs+3I0vMeHcmJ3H/aXFnHen9neKnaVq8brkh1WjPI8set3NqxzZ2+Bmn1Rll/bFI2F7IENjFtWP80KGdWM9RGrMvLzfC+kSc0RJQ== osboxes@ansiblecontroller"
